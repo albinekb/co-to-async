@@ -39,13 +39,12 @@ export default function transformer (file, api) {
   }
 
   // log filter
-  const log = id => p => { console.log(id, p.node); return true }
+  // const log = id => p => { console.log(id, p.node); return true }
 
   const root = j(file.source)
 
   // yield -> await
   root.find(j.YieldExpression)
-    .filter(log('Replace yield'))
     .replaceWith(yieldToAwait)
 
   // a = co.wrap(function * () {}) > a = function * () {}
@@ -67,8 +66,22 @@ export default function transformer (file, api) {
 
   // function * () -> async function ()
   root.find(j.FunctionExpression, { generator: true })
-    .filter(log('4'))
     .replaceWith(generatorToAsync)
+
+  // remove require co
+  root
+    .find(j.VariableDeclaration)
+    .filter(p => {
+      const { declarations } = p.node
+      if (declarations.length !== 1) return false
+      const declaration = declarations[0]
+      if (declaration.id.name !== 'co') return false
+      if (declaration.init.callee.name !== 'require') return false
+      return true
+    })
+    .replaceWith(p => {
+      return null
+    })
 
   return root.toSource()
 }
