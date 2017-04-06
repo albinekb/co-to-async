@@ -2,8 +2,12 @@
   "name": "co-to-async",
   "version": "1.0.1",
   "main": "index.js",
-  "repository": "git@github.com:albinekb/co-to-async.git",
-  "author": "Albin Ekblom <albinekblom@gmail.com>",
+  "repository": "albinekb/co-to-async",
+  "author": {
+    "name": "Albin Ekblom",
+    "email": "albinekblom@gmail.com",
+    "url": "https://github.com/albinekb"
+  },
   "license": "MIT",
   "bin": {
     "co-to-async": "bin.js"
