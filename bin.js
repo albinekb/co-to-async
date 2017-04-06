@@ -91,7 +91,14 @@ async function cli () {
 
     if (packageManager === 'yarn') {
       await execa(packageManager, ['remove', 'co'])
-      console.log('package.json and yarn.lock updated!')
+        .catch(error => {
+          if (error.stderr === 'error This module isn\'t specified in a manifest.\n') {
+            console.log('looks like co is already removed, moving on..')
+            return
+          }
+          throw error
+        })
+        .then(() => console.log('package.json and yarn.lock updated!'))
     } else if (packageManager === 'npm') {
       await execa(packageManager, ['uninstall', 'co'])
       console.log('package.json updated!')

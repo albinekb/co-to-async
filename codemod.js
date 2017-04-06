@@ -83,5 +83,8 @@ export default function transformer (file, api) {
       return null
     })
 
-  return root.toSource()
+  const replaced = root.toSource()
+
+  return replaced
+    .replace(/async function\(/, 'async function (')
 }
