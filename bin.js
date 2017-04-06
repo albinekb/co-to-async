@@ -42,6 +42,10 @@ const jscodeshift = (args = ['--help']) => {
 }
 
 const transform = async (pwd, _opts) => {
+  const hasGitignore = await fsp.exists(path.join(process.cwd(), '.gitignore'))
+  if (!hasGitignore) {
+    throw new Error('You need to have a .gitignore, ignore node_modules etc')
+  }
   const opts = Object.assign({ dry: true }, _opts)
   const gitignore = path.join(pwd, '.gitignore')
   const args = [
