@@ -77,7 +77,7 @@ const transform = async (pwd, _opts) => {
 
 async function cli () {
   const folder = path.join(process.cwd())
-  console.log('')
+  console.log('Running in', folder)
   const opts = {
     dry: !flags.save
   }
