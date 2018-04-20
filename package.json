@@ -13,10 +13,10 @@
     "co-to-async": "bin.js"
   },
   "dependencies": {
-    "args": "^2.4.1",
-    "execa": "^0.6.3",
-    "fs-promise": "^2.0.2",
-    "jscodeshift": "^0.3.30",
-    "positive": "^1.0.9"
+    "args": "2.4.1",
+    "execa": "0.6.3",
+    "fs-promise": "2.0.2",
+    "jscodeshift": "0.3.30",
+    "positive": "1.0.9"
   }
 }
