@@ -3,7 +3,18 @@ export default function transformer (file, api) {
 
   const yieldToAwait = p => {
     const node = p.node
-    const arg = node.argument
+    let arg = node.argument
+    // use Promise.all for array literals, e.g.
+    // await Promise.all([promise1, promise2, ...])
+    if (arg.type === 'ArrayExpression') {
+      arg = j.callExpression(
+        j.memberExpression(
+          j.identifier('Promise'),
+          j.identifier('all')
+        ),
+        [arg]
+      )
+    }
     const n = j.awaitExpression(arg)
     return n
   }
