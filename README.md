@@ -1,5 +1,7 @@
 # co-to-async
 
+# ⚠️⚠️⚠️ ARCHIVED - This tool is no longer useful, native promises have been around for a while now ;) ⚠️⚠️⚠️
+
 ## Are you using [co](github.com/tj/co)?
 
 This CLI utility will help you convert your code to use native **async/await**
